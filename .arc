@@ -8,6 +8,11 @@ prune true
 enhance/arc-plugin-enhance
 enhance/styles-cribsheet
 
+@scheduled
+get-aqi
+  rate 30 minutes
+  src app/jobs/scheduled/
+
 @aws
 runtime nodejs18.x
 
