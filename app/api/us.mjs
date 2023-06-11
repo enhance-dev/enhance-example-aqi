@@ -1,12 +1,6 @@
 import process from 'node:process'
 
 const { AIRNOW_KEY } = process.env
-const AIRNOW_URL = [
-  'https://www.airnowapi.org/aq/observation/zipCode/current/',
-  '?format=application/json&API_KEY=',
-  AIRNOW_KEY,
-  '&distance=25&zipCode=',
-]
 
 /** @type {import('@enhance/types').EnhanceApiFn} */
 export async function get({ query }) {
@@ -16,8 +10,13 @@ export async function get({ query }) {
   // TODO: cache AQI data by zip
 
   if (zip) {
-    AIRNOW_URL.push(zip)
-    const url = AIRNOW_URL.join('')
+    const url = [
+      'https://www.airnowapi.org/aq/observation/zipCode/current/',
+      '?format=application/json&API_KEY=',
+      AIRNOW_KEY,
+      '&distance=25&zipCode=',
+      zip
+    ].join('')
 
     try {
       const response = await fetch(url)
