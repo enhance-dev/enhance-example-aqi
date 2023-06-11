@@ -1,3 +1,3 @@
-import { handler } from '../app/jobs/scheduled/get-aqi.mjs';
+import { handler } from '../jobs/scheduled/get-aqi/index.mjs';
 
 await handler();

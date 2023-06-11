@@ -11,7 +11,7 @@ enhance/styles-cribsheet
 @scheduled
 get-aqi
   rate 30 minutes
-  src app/jobs/scheduled/
+  src jobs/scheduled/get-aqi
 
 @aws
 runtime nodejs18.x
