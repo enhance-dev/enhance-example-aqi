@@ -14,6 +14,13 @@ const SCALE = [
 const REAL_BAD = { emoji: '💀', message: 'Hazardous' }
 const UNKNOWN = { emoji: '🤷', message: 'Unknown' }
 
+function friendlyParameter(parameter) {
+  switch (parameter) {
+  case 'O3': return 'Ozone'
+  default: return parameter
+  }
+}
+
 /** @type {import('@enhance/types').EnhanceElemFn} */
 export default function AqiStat({ html, state: { attrs } }) {
   const {
@@ -46,7 +53,7 @@ export default function AqiStat({ html, state: { attrs } }) {
 
     <div class="flex flex-row gap-1 justify-content-between">
       <div>${status.emoji} ${status.message}</div>
-      <div>${parameter}: ${value}</div>
+      <div>${friendlyParameter(parameter)}: ${value}</div>
     </div>
     <meter
       min="${min.toString()}"

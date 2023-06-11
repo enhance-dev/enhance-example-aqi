@@ -15,6 +15,7 @@ get-aqi
 
 @aws
 runtime nodejs18.x
+timeout 30
 
 @begin
 appID SF1X9L3V

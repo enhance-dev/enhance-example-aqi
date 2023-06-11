@@ -29,6 +29,8 @@ export const get = async function() {
     const updated = new Date(firstD.DateObserved)
     updated.setHours(firstD.HourObserved)
 
+    // TODO: use myAqi.airNow.parameters like api/us.mjs
+
     myAqi.airNow.city = firstD.ReportingArea
     myAqi.airNow.state = firstD.StateCode
     myAqi.airNow.updated = updated.toLocaleString('en-us')

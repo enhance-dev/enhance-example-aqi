@@ -1,5 +1,6 @@
 /** @type {import('@enhance/types').EnhanceElemFn} */
 export default function AqiWidget({ html, state: { store } }) {
+  // TODO: refactor like us-widget
   const { myAqi: { iqAir, airNow } } = store
 
   return html`
