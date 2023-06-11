@@ -33,11 +33,11 @@ export default function UsWidget({ html, state: { store } }) {
 
   return html`
     ${css()}
-    <section class="flex flex-col gap1 p1 align-items-stretch radius1">
-      <h1 class="text1 font-bold">Air Now (US EPA)</h1>
+    <section class="flex flex-col gap1 p1 align-items-center radius1">
+      <h1 class="text1 font-bold">AirNow (US EPA)</h1>
 
       <div class="flex flex-col gap-2">
-        ${airNow.parameters.map(d => `
+        ${airNow.parameters.map(d => /*html*/`
           <aqi-stat parameter="${d.parameter}" value="${d.value}"></aqi-stat>
         `).join('')}
       </div>

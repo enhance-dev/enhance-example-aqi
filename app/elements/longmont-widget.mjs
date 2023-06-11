@@ -13,10 +13,10 @@ export default function AqiWidget({ html, state: { store } }) {
 
     <h2 class="mbs2 text-center text1 font-bold" style="color: white;">Longmont, CO:</h2>
 
-    <section class="flex flex-col gap1 p1 align-items-stretch radius1">
-      <h2 class="text1 font-bold">Air Now (US EPA)</h2>
+    <section class="flex flex-col gap1 p1 align-items-center radius1">
+      <h2 class="text1 font-bold">AirNow (US EPA)</h2>
 
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-2 align-items-center">
         <aqi-stat parameter="Ozone" value="${airNow.O3.value}"></aqi-stat>
         <aqi-stat parameter="PM 2.5" value="${airNow.PM2_5.value}"></aqi-stat>
         <aqi-stat parameter="PM 10" value="${airNow.PM10.value}"></aqi-stat>
@@ -26,7 +26,7 @@ export default function AqiWidget({ html, state: { store } }) {
       <time datetime="${airNow.updated}">${airNow.updated}</time>
     </section>
 
-    <section class="flex flex-col gap1 p1 align-items-stretch radius1">
+    <section class="flex flex-col gap1 p1 align-items-center radius1">
       <h2 class="text1 font-bold">IQ Air</h2>
       <aqi-stat parameter="${iqAir.parameter}" value="${iqAir.value}"></aqi-stat>
       <p>${iqAir.city}, ${iqAir.state}, ${iqAir.country}</p>
