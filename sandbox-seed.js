@@ -18,7 +18,7 @@ module.exports = {
           StateCode: 'CO',
         },
         {
-          AQI: 23,
+          AQI: 150,
           Category: {
             Name: 'Good',
             Number: 1,
@@ -31,7 +31,7 @@ module.exports = {
           StateCode: 'CO',
         },
         {
-          AQI: 27,
+          AQI: 445,
           Category: {
             Name: 'Good',
             Number: 1,

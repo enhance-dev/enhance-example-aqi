@@ -1,0 +1,28 @@
+<main class="flex flex-col gap2 p1 align-items-center font-sans">
+  <section class="flex flex-col gap1 p1 align-items-center radius1">
+    <h1 class="text-center text1 font-bold">Test</h1>
+    <p>This is a test page with a few iterations of the AQI meter.</p>
+  </section>
+
+  <section class="flex flex-col gap1 p1 align-items-center radius1">
+    <aqi-meter percent="-50"></aqi-meter>
+    <aqi-meter percent="10"></aqi-meter>
+    <aqi-meter percent="50"></aqi-meter>
+    <aqi-meter percent="75"></aqi-meter>
+    <aqi-meter percent="150"></aqi-meter>
+  </section>
+
+  <section class="flex flex-col gap1 p1 align-items-center radius1">
+    <aqi-meter-0 value="0"></aqi-meter-0>
+    <aqi-meter-0 value="250"></aqi-meter-0>
+    <aqi-meter-0 value="445"></aqi-meter-0>
+  </section>
+
+  <section class="flex flex-col gap1 p1 align-items-center radius1">
+    <aqi-range percent="0" value="0"></aqi-range>
+    <aqi-range percent="50" value="250"></aqi-range>
+    <aqi-range percent="99" value="445"></aqi-range>
+  </section>
+</main>
+
+<aqi-footer></aqi-footer>
