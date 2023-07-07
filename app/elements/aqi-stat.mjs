@@ -25,13 +25,27 @@ export default function AqiStat({ html, state: { attrs } }) {
   let status = getStatus(percent)
 
   return html`
-    <div class="flex flex-row gap1 align-items-end justify-content-between">
-      <aqi-meter percent="${percent.toString()}"></aqi-meter>
+    <style>
+      :host {
+        display: block;
+        width: 100%;
+      }
+      .message {
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        color: white;
+      }
+      .parameter {
+        color: gray;
+      }
+    </style>
 
-      <div class="stats flex flex-col gap-5 align-items-end">
-        <div class="value text-2 font-semibold">${value}</div>
-        <div class="message text0 font-bold">${status.message}</div>
-        <div class="parameter text-1 font-bold">${friendlyParameter(parameter)}</div>
+    <div class="flex flex-row gap1 align-items-end justify-content-around">
+      <aqi-meter percent="${percent.toString()}" value="${value}"></aqi-meter>
+
+      <div class="stats flex flex-col gap-4 align-self-center align-items-end">
+        <div class="message text1 font-bold" style="background-color: ${status.color}">${status.message}</div>
+        <div class="parameter text0 font-bold">${friendlyParameter(parameter)}</div>
       </div>
     </div>
   `

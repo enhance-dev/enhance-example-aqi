@@ -2,7 +2,7 @@ import { SCALE, REAL_BAD, UNKNOWN } from '../util/scale.mjs'
 
 /** @type {import('@enhance/types').EnhanceElemFn} */
 export default function AqiMeter({ html, state: { attrs } }) {
-  const { percent = '0' } = attrs
+  const { percent = '0', value = '0' } = attrs
   const val = Math.min(Math.max(Number(percent), 0), 100)
 
   let status
@@ -23,7 +23,7 @@ export default function AqiMeter({ html, state: { attrs } }) {
   const arcL = circumference * (arcLength / 360) // arc length px
 
   const dashArray = `${arcL} ${circumference}`              // two segments: arc, rest
-  const dashOffset = (arcL - (val / 100) * arcL).toString()
+  const dashOffset = (arcL - (val / 100) * arcL).toString() // offset to show value
 
   const circlePath = [                                // draw a circle
     `M ${gaugeW/2}, ${gaugeH/2}`,                     // move to center
@@ -40,6 +40,9 @@ export default function AqiMeter({ html, state: { attrs } }) {
 
   return html`
     <style>
+      :host {
+        display: block;
+      }
       svg {
         height: ${gaugeHS}px;
         width: ${gaugeWS}px;
@@ -48,6 +51,9 @@ export default function AqiMeter({ html, state: { attrs } }) {
       path.meter {
         transform-origin: 50% 50% 0;
         transform: rotate(-45deg);
+      }
+      text.meter-value-number {
+        font-weight: 600;
       }
     </style>
 
@@ -80,6 +86,15 @@ export default function AqiMeter({ html, state: { attrs } }) {
         text-anchor="middle"
         font-size="${radiusS}px"
       >${status.emoji}</text>
+      <text
+        class="meter meter-value-number"
+        x="50%"
+        y="90%"
+        dominant-baseline="bottom"
+        text-anchor="middle"
+        font-size="${(radius/2).toString()}px"
+        fill="${status.color}"
+      >${value}</text>
     </svg>
   `
 }
