@@ -44,8 +44,7 @@ export async function get({ query }) {
             value: d.AQI,
             city: d.ReportingArea,
             state: d.StateCode,
-            // AirNow date is already in local time
-            updated: updated.toLocaleString('en-us')
+            updated: updated.toLocaleString('en-us'),
           })
         }
 

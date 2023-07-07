@@ -6,7 +6,6 @@ prune true
 
 @plugins
 enhance/arc-plugin-enhance
-enhance/styles-cribsheet
 
 @scheduled
 get-aqi

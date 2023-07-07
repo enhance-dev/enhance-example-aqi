@@ -2,35 +2,15 @@
   "name": "enhance-example-aqi",
   "version": "0.0.1",
   "scripts": {
-    "start": "npx sandbox",
-    "lint": "eslint ./app/**/*.mjs --fix"
+    "start": "npx enhance dev"
   },
   "dependencies": {
     "@begin/data": "^4.0.2",
-    "@enhance/arc-plugin-enhance": "^6.1.1",
-    "@enhance/arc-plugin-styles": "^3.0.3",
-    "@enhance/styles-cribsheet": "^0.0.8"
+    "@enhance/arc-plugin-enhance": "^6.1.6",
+    "@enhance/arc-plugin-styles": "^3.0.3"
   },
   "devDependencies": {
-    "@architect/sandbox": "^5.6.8",
-    "@enhance/types": "^0.6.0",
-    "eslint": "^8.30.0"
-  },
-  "eslintConfig": {
-    "env": {
-      "node": true
-    },
-    "extends": "eslint:recommended",
-    "rules": {
-      "indent": [
-        "error",
-        2
-      ]
-    },
-    "ignorePatterns": [],
-    "parserOptions": {
-      "sourceType": "module",
-      "ecmaVersion": 2022
-    }
+    "@enhance/cli": "^1.0.3",
+    "@enhance/types": "^0.6.0"
   }
 }
