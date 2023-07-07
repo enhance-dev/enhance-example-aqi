@@ -13,62 +13,61 @@ export default function AqiMeter({ html, state: { attrs } }) {
   }
   if (!status) status = UNKNOWN
 
-  const gaugeW = 120
-  const gaugeH = gaugeW
-  const radius = gaugeW * 0.4
-  const arcLength = 270
+  let gaugeW = 120          // width px
+  let gaugeH = gaugeW       // height px
+  let radius = gaugeW * 0.4 // radius px
+  const arcLength = 270     // arc length in degrees
 
-  const strokeWidth = radius * 0.2
-  const innerRadius = radius - strokeWidth / 2
-  const circumference = innerRadius * 2 * Math.PI;
-  const arc = circumference * (arcLength / 360);
+  const strokeWidth = 10                         // stroke width p
+  const circumference = radius * 2 * Math.PI     // circumference px
+  const arcL = circumference * (arcLength / 360) // arc length px
 
-  const dashArray = `${arc} ${circumference}`;
-  const dashOffset = (arc - (val / 100) * arc).toString();
+  const dashArray = `${arcL} ${circumference}`              // two segments: arc, rest
+  const dashOffset = (arcL - (val / 100) * arcL).toString()
 
-  const meterPathDraw = [
+  const circlePath = [                                // draw a circle
     `M ${gaugeW/2}, ${gaugeH/2}`,                     // move to center
     `m -${radius}, 0`,                                // move left
     `a ${radius},${radius} 0 1,1 ${radius * 2},0`,    // arc
     `a ${radius},${radius} 0 1,1 -${radius * 2},0 Z`, // arc
   ].join(' ')
 
-  const gwStr = gaugeW.toString()
-  const ghStr = gaugeH.toString()
-  const trackWStr = strokeWidth.toString()
-  const valWStr = (strokeWidth * 1.3).toString()
-  const radiusStr = radius.toString()
+  const gaugeWS = gaugeW.toString()
+  const gaugeHS = gaugeH.toString()
+  const radiusS = radius.toString()
+  const trackWS = strokeWidth.toString()
+  const valueWS = (strokeWidth * 1.3).toString()
 
   return html`
     <style>
       svg {
-        height: ${ghStr}px;
-        width: ${gwStr}px;
+        height: ${gaugeHS}px;
+        width: ${gaugeWS}px;
         display: block;
       }
       path.meter {
         transform-origin: 50% 50% 0;
-        transform: rotate(-30deg); /* math? */
+        transform: rotate(-45deg);
       }
     </style>
 
-    <svg viewbox="0 0 ${gwStr} ${ghStr}">
+    <svg viewbox="0 0 ${gaugeWS} ${gaugeHS}">
       <path
         class="meter meter-track"
-        d="${meterPathDraw}"
+        d="${circlePath}"
         stroke-dasharray="${dashArray}"
         stroke-dashoffset="0"
-        stroke-width="${trackWStr}"
+        stroke-width="${trackWS}"
         stroke-linecap="round"
         fill="none"
         stroke="lightgray"
       />
       <path
         class="meter meter-value"
-        d="${meterPathDraw}"
+        d="${circlePath}"
         stroke-dasharray="${dashArray}"
         stroke-dashoffset="${dashOffset}"
-        stroke-width="${valWStr}"
+        stroke-width="${valueWS}"
         stroke-linecap="round"
         fill="none"
         stroke="${status.color}"
@@ -79,7 +78,7 @@ export default function AqiMeter({ html, state: { attrs } }) {
         y="50%"
         dominant-baseline="middle"
         text-anchor="middle"
-        font-size="${radiusStr}px"
+        font-size="${radiusS}px"
       >${status.emoji}</text>
     </svg>
   `
