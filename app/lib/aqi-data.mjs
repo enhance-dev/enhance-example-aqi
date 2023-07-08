@@ -5,11 +5,11 @@ const { AIRNOW_KEY } = process.env
 
 export async function getAqiForZip(zip) {
   // check cache
-  const cacheKey = `zip#${zip}`
+  const cacheKey = `zip|${zip}`
   const cached = await data.get({ table: 'aqi', key: cacheKey })
 
   if (cached?.airNowData) {
-    console.log(`Zip ${zip} found in cache`)
+    console.log(`Zip ${zip.substring(0, 3)}… cache hit`)
     return cached.airNowData
   }
 
@@ -31,7 +31,7 @@ export async function getAqiForZip(zip) {
     const airNowData = {}
     const firstD = responseData[0]
     const updated = new Date(firstD.DateObserved)
-    updated.setHours(firstD.HourObserved)
+    updated.setHours(firstD.HourObserved + 1)
 
     airNowData.city = firstD.ReportingArea
     airNowData.state = firstD.StateCode
@@ -61,6 +61,8 @@ export async function getAqiForZip(zip) {
     })
 
     return airNowData
-  } else
+  } else {
+    // TODO: cache as no data to prevent repeated calls
     throw new Error('No data')
+  }
 }

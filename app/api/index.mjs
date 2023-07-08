@@ -8,9 +8,11 @@ const DEFAULT_ZIP = '10001'
 /** @type {import('@enhance/types').EnhanceApiFn & any} */
 export const get = async function ({ requestContext }) {
   let userIp = requestContext.http.sourceIp
+  // userIp = '2600:6c46:4500:41f::d301:4256:6710' // IPv6 in MN (55060) with no AQI data
+  // userIp ='104.159.127.255' // IP in Canada
   if (userIp === '1') userIp = MY_IP // local Sandbox
 
-  let zip = DEFAULT_ZIP
+  let zip
   let ip2location
   try {
     zip = await ip2Zip(userIp)
@@ -21,6 +23,7 @@ export const get = async function ({ requestContext }) {
 
   if (ip2location) { // fallback
     console.log('Falling back to ipapi.co')
+
     try {
       zip = await ipToZip(userIp)
     } catch (error) {
@@ -30,9 +33,11 @@ export const get = async function ({ requestContext }) {
 
   let aqiData
   try {
-    aqiData = await getAqiForZip(zip)
+    aqiData = await getAqiForZip(zip || DEFAULT_ZIP)
   } catch (error) {
-    return { status: 500, json: { error: error.message } }
+    return error.message === 'No data'
+      ? { status: 200, json: { aqiData: await getAqiForZip(DEFAULT_ZIP) } } // better than error
+      : { status: 500, json: { error: error.message } }
   }
 
   if (!aqiData)
