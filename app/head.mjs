@@ -9,6 +9,7 @@ export default function Head() {
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Enhance app w AQI data based on user IP or input, displayed as HTML custom elements, and cached w Dynamo">
       <title>Air Quality Index (AQ) in the US - powered by Enhance</title>
       ${linkTag()}
       <link rel="icon" href="https://fav.farm/😶‍🌫️">
@@ -31,7 +32,7 @@ export default function Head() {
           color: var(--light);
         }
         .text-gray {
-          color: var(--secondary-400);
+          color: var(--secondary-500);
         }
         .text-warning {
           color: var(--warning-500);
