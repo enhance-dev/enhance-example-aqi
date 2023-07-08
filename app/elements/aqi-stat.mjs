@@ -30,20 +30,14 @@ export default function AqiStat({ html, state: { attrs } }) {
         display: block;
         width: 100%;
       }
-      .message {
-        color: white;
-      }
-      .parameter {
-        color: gray;
-      }
     </style>
 
     <div class="flex flex-row gap1 align-items-end justify-content-between">
       <aqi-meter percent="${percent.toString()}" value="${value}"></aqi-meter>
 
-      <div class="stats flex flex-col gap-4 align-self-center align-items-end">
-        <div class="message text1 font-bold p-5 radius1" style="background-color: ${status.color}">${status.message}</div>
-        <div class="parameter text0 font-bold">${friendlyParameter(parameter)}</div>
+      <div class="flex flex-col gap-4 align-self-center align-items-end">
+        <div class="text-light text1 font-bold p-5 radius1" style="background-color: ${status.color}">${status.message}</div>
+        <div class="text-gray text0 font-bold">${friendlyParameter(parameter)}</div>
       </div>
     </div>
   `

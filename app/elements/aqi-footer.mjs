@@ -4,14 +4,10 @@ export default function AqiFooter({ html }) {
     <style>
       :host {
         display: block;
-        color: aliceblue;
-      }
-      a {
-        text-decoration: underline;
       }
     </style>
 
-    <footer class="font-sans">
+    <footer class="text-light font-sans">
       <nav class="text-center text0">
         <a href="/">Home</a> •
         <a href="/us">US</a>

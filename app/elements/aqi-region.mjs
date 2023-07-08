@@ -4,11 +4,11 @@ export default function AqiRegion({ html, state: { store } }) {
 
   return html`
     ${error && /*html*/`
-      <p style="color: yellow;"><strong>Error:</strong> "${error}"</p>
+      <p class="text-warning"><strong>Error:</strong> "${error}"</p>
     `}
 
     ${aqiData && /*html*/`
-      <section class="flex flex-col gap-3 p1 align-items-center radius1">
+      <section class="panel flex flex-col gap-3 p1 align-items-center radius1">
         <h1 class="text-center text1 font-bold">
           ${aqiData.city}, ${aqiData.state}
         </h1>

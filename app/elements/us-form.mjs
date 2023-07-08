@@ -2,6 +2,12 @@
 export default function UsForm({ html }) {
   return html`
     <style>
+      :host {
+        display: block;
+      }
+      input[type='number'] {
+        width: 5rem;
+      }
       input, button {
         border: 1px solid #ccc;
         border-radius: 0.25rem;
@@ -9,10 +15,10 @@ export default function UsForm({ html }) {
       }
     </style>
 
-    <section class="mbs1 flex flex-col gap1 p1 radius1">
+    <section class="panel gap1 p0 radius1">
       <form class="flex gap1 align-items-center" action="/us" method="get">
-        <label for="zip">US Zip Code:</label>
-        <input class="border-solid" name="zip" type="number" placeholder="10001" />
+        <label class="font-semibold" for="zip">US Zip:</label>
+        <input name="zip" type="number" placeholder="10001" />
         <button type="submit">Get AQI</button>
       </form>
     </section>
