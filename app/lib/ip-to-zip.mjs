@@ -10,13 +10,15 @@ async function getCache(ip) {
   })
 }
 
-async function setCache(ip, zip, isUS = true) {
+async function setCache(ip, zip, isUS = true, source) {
   return data.set({
     table: 'ip',
     key: `ip|${ip}`,
-    ttl: 60 * 60 * 24 * 7, // 1 week
+    ttl: Date.now() + (60 * 60 * 24 * 7), // 1 week
+    TTL: Date.now() + (60 * 60 * 24 * 7), // which is it?
     zip,
     isUS,
+    source,
   })
 }
 
@@ -24,8 +26,7 @@ export async function ip2Zip(ip) {
   const cached = await getCache(ip)
 
   if (cached?.zip) {
-    const ipStub = ip.split('.')[0].split(':')[0]
-    console.log(`IP ${ipStub}… cache hit`)
+    console.log(`IP ${ip.substring(0, 6)}… cache hit`)
 
     return Object.hasOwn(cached, 'isUS') && cached.isUS
       ? cached.zip
@@ -45,7 +46,7 @@ export async function ip2Zip(ip) {
   const isUS = ipData.country_code === 'US'
   const zip = ipData.zip_code
 
-  setCache(ip, zip, isUS)
+  setCache(ip, zip, isUS, 'ip2location.io')
 
   return isUS ? zip : null
 }
@@ -75,7 +76,7 @@ export async function ipToZip(ip) {
   const isUS = ipData.country_code === 'US'
   const zip = ipData.postal
 
-  setCache(ip, zip, isUS)
+  setCache(ip, zip, isUS, 'ipapi.co')
 
   return isUS ? zip : null
 }
