@@ -3,21 +3,13 @@ import data from '@begin/data'
 
 const { AIRNOW_KEY } = process.env
 
-/**
- * @param {string} zip
- * @returns {Promise<AqiData>}
- */
 export async function getAqiForZip(zip) {
-  if (!zip)
-    throw new Error('Zip code required')
-
   // check cache
   const cacheKey = `zip#${zip}`
   const cached = await data.get({ table: 'aqi', key: cacheKey })
 
   if (cached?.airNowData) {
     console.log(`Zip ${zip} found in cache`)
-    // @ts-ignore
     return cached.airNowData
   }
 
@@ -69,23 +61,6 @@ export async function getAqiForZip(zip) {
     })
 
     return airNowData
-  } else {
+  } else
     throw new Error('No data')
-  }
 }
-
-/**
- * @typedef {object} AqiData
- * @property {string} city
- * @property {string} state
- * @property {string} updated
- * @property {AqiParameter[]} parameters
- */
-/**
- * @typedef {object} AqiParameter
- * @property {string} parameter
- * @property {number} value
- * @property {string} city
- * @property {string} state
- * @property {string} updated
-*/
