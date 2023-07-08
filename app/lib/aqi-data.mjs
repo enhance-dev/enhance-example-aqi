@@ -56,9 +56,9 @@ export async function getAqiForZip(zip) {
     await data.set({
       table: 'aqi',
       key: cacheKey,
-      ttl: Date.now() + (60 * 30), // 30 min
-      TTL: Date.now() + (60 * 30), // which is it?
       airNowData,
+      created: new Date().toISOString(),
+      TTL: Math.round(Date.now() / 1_000) + (60 * 5), // 5 minutes
     })
 
     return airNowData

@@ -1,5 +1,5 @@
 import process from 'node:process'
-import data, { set } from '@begin/data'
+import data from '@begin/data'
 
 const { IP2LOCATION_KEY } = process.env
 
@@ -14,11 +14,11 @@ async function setCache(ip, zip, isUS = true, source) {
   return data.set({
     table: 'ip',
     key: `ip|${ip}`,
-    ttl: Date.now() + (60 * 60 * 24 * 7), // 1 week
-    TTL: Date.now() + (60 * 60 * 24 * 7), // which is it?
     zip,
     isUS,
     source,
+    created: new Date().toISOString(),
+    TTL: Math.round(Date.now() / 1_000) + (60 * 60 * 24), // 1 day
   })
 }
 
