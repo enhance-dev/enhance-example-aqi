@@ -2,15 +2,15 @@ import process from 'node:process'
 import { getAqiForZip } from '../lib/aqi-data.mjs'
 import { ip2Zip, ipToZip } from '../lib/ip-to-zip.mjs'
 
-const { MY_IP } = process.env
+const { ARC_ENV, MY_IP } = process.env
 const DEFAULT_ZIP = '10001'
 
 /** @type {import('@enhance/types').EnhanceApiFn & any} */
 export const get = async function ({ requestContext }) {
   let userIp = requestContext.http.sourceIp
+  if (ARC_ENV === 'testing') userIp = MY_IP // local Sandbox
   // userIp = '2600:6c46:4500:41f::d301:4256:6710' // IPv6 in MN (55060) with no AQI data
-  // userIp ='104.159.127.255' // IP in Canada
-  if (userIp === '1') userIp = MY_IP // local Sandbox
+  // userIp = '104.159.127.255' // IP in Canada
 
   let zip
   let ip2location

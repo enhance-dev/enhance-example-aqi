@@ -7,7 +7,7 @@ export default function AqiFooter({ html }) {
       }
     </style>
 
-    <footer class="text-light font-sans">
+    <footer class="text-light font-snazzy">
       <nav class="text-center text0">
         <a href="/">Home</a> •
         <a href="/us">US</a>

@@ -1,5 +1,5 @@
 const SCALE = [
-  { emoji: '🤩', color: 'green', message: 'Great!' },
+  { emoji: '🤩', color: 'forestgreen', message: 'Great!' },
   { emoji: '😊', color: 'gold', message: 'Good' },
   { emoji: '😐', color: 'orange', message: 'Moderate' },
   { emoji: '😣', color: 'firebrick', message: 'Unhealthy' },

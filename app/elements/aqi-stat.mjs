@@ -36,7 +36,7 @@ export default function AqiStat({ html, state: { attrs } }) {
       <aqi-meter percent="${percent.toString()}" value="${value}"></aqi-meter>
 
       <div class="flex flex-col gap-4 align-self-center align-items-end">
-        <h2 class="text-light text1 font-bold p-5 radius1" style="background-color: ${status.color}">${status.message}</h2>
+        <h2 class="text-white text2 font-bold p-3 radius1" style="background-color: ${status.color}">${status.message}</h2>
         <h3 class="text-gray text0 font-bold">${friendlyParameter(parameter)}</h3>
       </div>
     </div>

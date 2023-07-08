@@ -15,7 +15,7 @@ export default function Head() {
       <link rel="icon" href="https://fav.farm/😶‍🌫️">
       <style>
         body {
-          background: darkslateblue;
+          background: var(--primary-800);
         }
         a {
           text-decoration: underline;
@@ -28,6 +28,9 @@ export default function Head() {
             0px 20px 15px rgba(3, 7, 18, 0.03),
             0px 32px 24px rgba(3, 7, 18, 0.02);
         }
+        .text-white {
+          color: white;
+        }
         .text-light {
           color: var(--light);
         }
@@ -36,6 +39,9 @@ export default function Head() {
         }
         .text-warning {
           color: var(--warning-500);
+        }
+        .font-snazzy {
+          font-family: ui-rounded, -apple-system, BlinkMacSystemFont, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif;
         }
       </style>
     </head>
