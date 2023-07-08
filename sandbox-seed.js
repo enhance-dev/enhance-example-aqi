@@ -1,78 +1,27 @@
 module.exports = {
   data: [
     {
-      scopeID: 'enhance-example-aqi', // arc @app name
-      dataID: 'staging#aqi#my-aqi', // arc env + table + key
-      airNowData: [
-        {
-          AQI: 58,
-          Category: {
-            Name: 'Moderate',
-            Number: 2,
+      scopeID: 'enhance-example-aqi',  // arc @app name
+      dataID: 'staging#aqi#zip#80501', // arc env + table + key
+      airNowData: {
+        city: 'Denver-Boulder',
+        state: 'CO',
+        updated: '7/7/2023, 7:00:00 PM',
+        parameters: [
+          {
+            parameter: 'O3',
+            value: 44,
           },
-          DateObserved: '2023-06-08 ',
-          HourObserved: 10,
-          LocalTimeZone: 'MST',
-          ParameterName: 'O3',
-          ReportingArea: 'Denver-Boulder',
-          StateCode: 'CO',
-        },
-        {
-          AQI: 150,
-          Category: {
-            Name: 'Good',
-            Number: 1,
+          {
+            parameter: 'PM2.5',
+            value: 255,
           },
-          DateObserved: '2023-06-08 ',
-          HourObserved: 10,
-          LocalTimeZone: 'MST',
-          ParameterName: 'PM2.5',
-          ReportingArea: 'Denver-Boulder',
-          StateCode: 'CO',
-        },
-        {
-          AQI: 445,
-          Category: {
-            Name: 'Good',
-            Number: 1,
-          },
-          DateObserved: '2023-06-08 ',
-          HourObserved: 10,
-          LocalTimeZone: 'MST',
-          ParameterName: 'PM10',
-          ReportingArea: 'Denver-Boulder',
-          StateCode: 'CO',
-        },
-      ],
-      iqAirData: {
-        data: {
-          city: 'Longmont',
-          country: 'USA',
-          current: {
-            pollution: {
-              aqicn: 1,
-              aqius: 4,
-              maincn: 'p2',
-              mainus: 'p2',
-              ts: '2023-06-08T17:00:00.000Z',
-            },
-            weather: {
-              hu: 48,
-              ic: '01d',
-              pr: 1014,
-              tp: 22,
-              ts: '2023-06-08T17:00:00.000Z',
-              wd: 70,
-              ws: 2.06,
-            },
-          },
-          location: {
-            type: 'Point',
-          },
-          state: 'Colorado',
-        },
-        status: 'success',
-      },
+          {
+            parameter: 'PM10',
+            value: 499,
+          }
+        ]
+      }
     },
   ],
 }

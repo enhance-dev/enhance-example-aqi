@@ -1,9 +1,9 @@
-import { getStatus } from '../util/scale.mjs'
+import { getStatus } from '../lib/scale.mjs'
 
 function friendlyParameter(parameter) {
   switch (parameter) {
-  case 'O3': return 'Ozone'
-  default: return parameter
+    case 'O3': return 'Ozone'
+    default: return parameter
   }
 }
 
@@ -22,7 +22,7 @@ export default function AqiStat({ html, state: { attrs } }) {
 
   const percent = (val / (maxVal - minVal) * 100)
 
-  let status = getStatus(percent)
+  const status = getStatus(percent)
 
   return html`
     <style>
@@ -31,8 +31,6 @@ export default function AqiStat({ html, state: { attrs } }) {
         width: 100%;
       }
       .message {
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.25rem;
         color: white;
       }
       .parameter {
@@ -40,11 +38,11 @@ export default function AqiStat({ html, state: { attrs } }) {
       }
     </style>
 
-    <div class="flex flex-row gap1 align-items-end justify-content-around">
+    <div class="flex flex-row gap1 align-items-end justify-content-between">
       <aqi-meter percent="${percent.toString()}" value="${value}"></aqi-meter>
 
       <div class="stats flex flex-col gap-4 align-self-center align-items-end">
-        <div class="message text1 font-bold" style="background-color: ${status.color}">${status.message}</div>
+        <div class="message text1 font-bold p-5 radius1" style="background-color: ${status.color}">${status.message}</div>
         <div class="parameter text0 font-bold">${friendlyParameter(parameter)}</div>
       </div>
     </div>

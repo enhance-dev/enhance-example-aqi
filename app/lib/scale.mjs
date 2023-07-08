@@ -1,4 +1,4 @@
-export const SCALE = [
+const SCALE = [
   { emoji: '🤩', color: 'limegreen', message: 'Great!' },
   { emoji: '😊', color: 'gold', message: 'Good' },
   { emoji: '😐', color: 'orange', message: 'Moderate' },
@@ -11,9 +11,15 @@ export const SCALE = [
   { emoji: '🥵', color: 'maroon', message: 'Hazardous' },
   { emoji: '🥵', color: 'maroon', message: 'Hazardous' },
 ]
-export const REAL_BAD = { emoji: '💀', color: 'black', message: 'Hazardous' }
-export const UNKNOWN = { emoji: '🤷', color: 'lightgray', message: 'Unknown' }
+const REAL_BAD = { emoji: '💀', color: 'black', message: 'Hazardous' }
+const UNKNOWN = { emoji: '🤷', color: 'lightgray', message: 'Unknown' }
 
+/**
+ * @param {number} val
+ * @param {number} max
+ * @param {number} min
+ * @returns {{emoji: string, color: string, message: string}}
+ */
 export function getStatus(val, max = 100, min = 0) {
   let status
   if (val >= max) status = REAL_BAD

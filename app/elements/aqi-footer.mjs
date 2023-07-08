@@ -3,21 +3,27 @@ export default function AqiFooter({ html }) {
   return html`
     <style>
       :host {
+        display: block;
         color: aliceblue;
       }
       a {
         text-decoration: underline;
       }
     </style>
-    <footer class="mbs1 font-sans">
-      <p class="text-center text-1">
+
+    <footer class="font-sans">
+      <nav class="text-center text0">
         <a href="/">Home</a> •
         <a href="/us">US</a>
-      </p>
-      <p class="mbs-1 text-center text-2">
+      </nav>
+      <aside class="mbs1 text-center text-1">
+        Powered by
+        <a href="https://enhance.dev/" target="_blank">Enhance</a>
+      </aside>
+      <aside class="mbs0 text-center text-2">
         Inspired by
         <a href="https://breathable.app/" target="_blank">breathable.app</a>
-      </p>
+      </aside>
     </footer>
   `
 }

@@ -1,37 +1,30 @@
-import { SCALE, REAL_BAD, UNKNOWN } from '../util/scale.mjs'
+import { getStatus } from '../lib/scale.mjs'
 
 /** @type {import('@enhance/types').EnhanceElemFn} */
 export default function AqiMeter({ html, state: { attrs } }) {
   const { percent = '0', value = '0' } = attrs
   const val = Math.min(Math.max(Number(percent), 0), 100)
+  const status = getStatus(val)
 
-  let status
-  if (val >= 100) status = REAL_BAD
-  else {
-    const index = Math.floor((val / 100) * (SCALE.length - 1))
-    status = SCALE[index]
-  }
-  if (!status) status = UNKNOWN
+  const gaugeW = 120          // width px
+  const gaugeH = gaugeW       // height px
+  const radius = gaugeW * 0.4 // radius is 40% of box
 
-  let gaugeW = 120          // width px
-  let gaugeH = gaugeW       // height px
-  let radius = gaugeW * 0.4 // radius px
-  const arcLength = 270     // arc length in degrees
+  const strokeWidth = 10                     // stroke width px
+  const circumference = radius * 2 * Math.PI // circumference px 🥧
+  const arcL = circumference * (270 / 360)   // arc length px
 
-  const strokeWidth = 10                         // stroke width p
-  const circumference = radius * 2 * Math.PI     // circumference px
-  const arcL = circumference * (arcLength / 360) // arc length px
-
-  const dashArray = `${arcL} ${circumference}`              // two segments: arc, rest
-  const dashOffset = (arcL - (val / 100) * arcL).toString() // offset to show value
+  const dashArray = `${arcL} ${circumference}`              // two segments: arc, empty
+  const dashOffset = (arcL - (val / 100) * arcL).toString() // meter fill
 
   const circlePath = [                                // draw a circle
-    `M ${gaugeW/2}, ${gaugeH/2}`,                     // move to center
+    `M ${gaugeW / 2}, ${gaugeH / 2}`,                 // move to center
     `m -${radius}, 0`,                                // move left
-    `a ${radius},${radius} 0 1,1 ${radius * 2},0`,    // arc
-    `a ${radius},${radius} 0 1,1 -${radius * 2},0 Z`, // arc
+    `a ${radius},${radius} 0 1,1 ${radius * 2},0`,    // half circle arc
+    `a ${radius},${radius} 0 1,1 -${radius * 2},0 Z`, // finish circle
   ].join(' ')
 
+  // strangs
   const gaugeWS = gaugeW.toString()
   const gaugeHS = gaugeH.toString()
   const radiusS = radius.toString()
@@ -52,7 +45,7 @@ export default function AqiMeter({ html, state: { attrs } }) {
         transform-origin: 50% 50% 0;
         transform: rotate(-45deg);
       }
-      text.meter-value-number {
+      text.meter-value {
         font-weight: 600;
       }
     </style>
@@ -69,7 +62,7 @@ export default function AqiMeter({ html, state: { attrs } }) {
         stroke="lightgray"
       />
       <path
-        class="meter meter-value"
+        class="meter meter-fill"
         d="${circlePath}"
         stroke-dasharray="${dashArray}"
         stroke-dashoffset="${dashOffset}"
@@ -79,22 +72,25 @@ export default function AqiMeter({ html, state: { attrs } }) {
         stroke="${status.color}"
       />
       <text
-        class="meter meter-emoji"
         x="50%"
         y="50%"
         dominant-baseline="middle"
         text-anchor="middle"
         font-size="${radiusS}px"
-      >${status.emoji}</text>
+      >
+        ${status.emoji}
+      </text>
       <text
-        class="meter meter-value-number"
+        class="meter-value "
         x="50%"
         y="90%"
         dominant-baseline="bottom"
         text-anchor="middle"
-        font-size="${(radius/2).toString()}px"
+        font-size="${(radius / 2).toString()}px"
         fill="${status.color}"
-      >${value}</text>
+      >
+        ${value}
+      </text>
     </svg>
   `
 }
